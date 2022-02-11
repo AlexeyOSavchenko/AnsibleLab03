@@ -1,0 +1,48 @@
+---
+- name: insall pakages
+  yum: 
+    name: "{{ inst_pakages }}"
+    state: latest
+ 
+- name: configure vstftpd
+  template:
+    src: main.j2
+    dest: /etc/vsftpd/vsftpd.conf
+  notify:
+    - restart_FTP
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ path_ftp_folder }}/upload"
+    state: directory
+    mode: '0777'
+
+- name: open ports for FTP-server
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  notify:
+    - restart_firewall
+  loop: "{{ ports_list }}"
+
+- name: Setbools
+  seboolean:
+    name: "{{ item }}"
+    state: on
+    persistent: on
+  loop: "{{ setbools_list }}"
+
+- name: Setcontext  
+  sefcontext:
+    target: "{{path_ftp_folder}}(/.*)?"
+    setype: public_content_rw_t
+    state: present
+
+- name: check services are running
+  service: 
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: "{{ services_list }}"
+...

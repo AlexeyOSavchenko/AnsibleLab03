@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Alexey Savchenko
+  description: Deploy and configure vsFTP server
+  company: MAPE
+
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+  - name: CentOS
+    versions:
+    - 8
+
+  galaxy_tags: []
+
+dependencies: []

@@ -1,0 +1,5 @@
+distro: "CentOS"
+
+services_list:
+  - httpd
+  - firewalld

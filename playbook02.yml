@@ -1,0 +1,7 @@
+---
+- name: use role to deploy VSFTP server
+  hosts: ftp_servers
+
+  roles:
+    - role: role_install_vsftpd
+...

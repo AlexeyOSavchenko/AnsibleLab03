@@ -1,0 +1,14 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{{ ansible_hostname }}</title>
+</head>
+<body>
+<h1 align="center">Welcome to my web server</h1>
+<br>
+<br>
+<p align="center">Hostname: {{ ansible_hostname }}.{{ ansible_domain }}</p>
+<p align="center">IP address: {{ ansible_eth1.ipv4.address }} / {{ ansible_eth1.ipv4.netmask }}</p>
+<p align="center">Linux distribution: {{ ansible_distribution }}</p>
+</body>
+</html>

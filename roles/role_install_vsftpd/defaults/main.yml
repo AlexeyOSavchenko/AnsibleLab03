@@ -1,0 +1,21 @@
+---
+inst_pakages:
+  - vsftpd
+  - firewalld
+  - python3-libsemanage
+  - policycoreutils-python-utils
+
+path_ftp_folder: /var/ftp/pub
+
+ports_list: 
+  - 20-21/tcp
+  - 20000-20010/tcp
+
+setbools_list:
+  - ftpd_full_access
+  - tftp_home_dir
+
+services_list:
+  - vsftpd
+  - firewalld
+...

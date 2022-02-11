@@ -1,0 +1,29 @@
+---
+- name: install packages
+  yum:
+    name: 
+      - httpd
+      - firewalld
+    state: latest
+  when: ansible_distribution == distro
+
+- name: create index.html
+  template:
+    src: index.j2
+    dest: /var/www/html/index.html
+  notify:
+    - restart_web_server
+
+- name: open ports for web-server
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    state: enabled
+
+- name: check services are running
+  service: 
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: "{{ services_list }}"
+...

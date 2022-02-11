@@ -1,0 +1,7 @@
+---
+- name: use role_install_httpd role
+  hosts: web_servers
+
+  roles:
+    - role: role_install_httpd
+...
